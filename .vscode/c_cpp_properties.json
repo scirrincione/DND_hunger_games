@@ -5,7 +5,9 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/headers",
-                "${workspaceFolder}/classes"
+                "${workspaceFolder}/classes",
+                "${workspaceFolder}/classes/Objects",
+                "${workspaceFolder}/headers/Interfaces"
             ],
             "defines": [
                 "_DEBUG",

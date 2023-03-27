@@ -1,9 +1,9 @@
-#ifndef IENTITY_H_
-#define IENTITY_H_
+#ifndef ICREATURE_H_
+#define ICREATURE_H_
 
-#include <iostream>
-#include <stdlib.h>
 #include "healthBar.cc"
+#include "IObject.h"
+#include "IMap.h"
 
 // global variables for maximum values of randomly generated stats
 int MAX_DAMAGE = 20;
@@ -11,10 +11,19 @@ int MAX_STEALTH = 15;
 int MAX_PERCEPTION = 18;
 int MAX_SKILL = 15;
 
-class IEntity {
+/**
+ * @class ICreature
+ * @brief represents various creatures that could be on the terrain
+ * 
+ * The IMap is the general interface for the different terrains that a player
+ * might find themselves in. Has the basic functions that each terrain can do
+ * like perceiving creatures in the terrain, checking and springing traps, and 
+ * facilitating encounters between creatures
+*/
+class ICreature : public IObject{
     public:
 
-      IEntity(){
+      ICreature(){
          lives = 1;
          location = nullptr;
       }
@@ -22,12 +31,12 @@ class IEntity {
      /**
       * @brief constructor for the most basic elements that are consistent across all entities
      */
-     IEntity(IMap* start, int l){
+     ICreature(IMap* start, int l){
         lives = l;
         location = start;
      }
 
-     virtual ~IEntity(){}
+     //virtual ~ICreature() {}
      
      /**
       * @brief resolves creature attempting to set a trap using randomly generated values
@@ -76,7 +85,7 @@ class IEntity {
      */
      virtual int getPassivePerception(){ return passivePerception; }
 
-     virtual int deathSequence(){
+     virtual bool deathSequence(){
         lives -= 1;
         if(lives <= 0){
             delete this;
@@ -136,4 +145,4 @@ class IEntity {
      
 };
 
-#endif // IENTITY_H_
+#endif // ICREATURE_H_

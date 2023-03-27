@@ -1,11 +1,9 @@
 #ifndef IMAP_H_
 #define IMAP_H_
 
-#include <vector>
-#include <iostream>
-
-#include "IEntity.h"
+#include "ICreature.h"
 #include "ITrap.h"
+#include "IObject.h"
 
 /**
  * @class IMap
@@ -16,7 +14,7 @@
  * like perceiving creatures in the terrain, checking and springing traps, and 
  * facilitating encounters between creatures
 */
-class IMap {
+class IMap : public IObject{
     public: 
 
      /**
@@ -38,8 +36,8 @@ class IMap {
      * 
      * @return returns a list of entities with stealth equal to or lower than check
     */
-    virtual std::vector<IEntity*> perceptionCheck(int check) {
-        std::vector<IEntity*> seenCreatures = {};
+    virtual std::vector<ICreature*> perceptionCheck(int check) {
+        std::vector<ICreature*> seenCreatures = {};
         for(auto creature : creatures){
             if(creature->getStealth()*stealth <= check){
                 seenCreatures.push_back(creature);
@@ -74,7 +72,7 @@ class IMap {
     /**
      * @brief resolves trap being sprung on victim
     */
-    virtual void trapSprung(IEntity* victim, ITrap* trap) {
+    virtual void trapSprung(ICreature* victim, ITrap* trap) {
         if(victim->check() < trap->getSkill()){
             if(victim->getHealthBar()->takeDamage(trap->getDamage())){ // if damage killed creature
                 creatureDies(victim);
@@ -85,14 +83,14 @@ class IMap {
     /**
      * @brief resolves if two beings encounter eachother
     */
-    virtual void encounter(IEntity* firstCreature, IEntity* secondCreature) {
+    virtual void encounter(ICreature* firstCreature, ICreature* secondCreature) {
         std::cout << firstCreature->getName() << " encounters " << secondCreature->getName();
     }
 
     /**
      * @brief resolves character dying
     */
-    virtual void creatureDies(IEntity* victim){
+    virtual void creatureDies(ICreature* victim){
         for(int i = 0; i < creatures.size(); i++){
             if(creatures.at(i) == victim){
                 if(creatures.at(i)->deathSequence()){ // if creature is dead
@@ -104,7 +102,7 @@ class IMap {
 
     protected:
      float stealth; // variable that impacts creatures ability to hide in certain terrain
-     std::vector<IEntity*> creatures; // creatures in biome
+     std::vector<ICreature*> creatures; // creatures in biome
      std::vector<ITrap*> traps; // traps in biome
 };
 

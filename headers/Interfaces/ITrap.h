@@ -1,7 +1,9 @@
 #ifndef ITRAP_H_
 #define ITRAP_H_
 
-class ITrap {
+#include "IObject.h"
+
+class ITrap : public IObject {
     public:
      
      /**
