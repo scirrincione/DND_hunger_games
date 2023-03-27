@@ -41,7 +41,7 @@ class IMap {
     virtual std::vector<IEntity*> perceptionCheck(int check) {
         std::vector<IEntity*> seenCreatures = {};
         for(auto creature : creatures){
-            if(creature->getStealth() <= check){
+            if(creature->getStealth()*stealth <= check){
                 seenCreatures.push_back(creature);
             }
         }
@@ -64,7 +64,7 @@ class IMap {
     virtual std::vector<ITrap*> trapCheck(int check) {
         std::vector<ITrap*> seenTraps = {};
         for(auto trap : traps){
-            if(trap->getStealth() <= check){
+            if(trap->getStealth()*stealth <= check){
                 seenTraps.push_back(trap);
             }
         }
@@ -102,7 +102,7 @@ class IMap {
         }
     }
 
-    private:
+    protected:
      float stealth; // variable that impacts creatures ability to hide in certain terrain
      std::vector<IEntity*> creatures; // creatures in biome
      std::vector<ITrap*> traps; // traps in biome

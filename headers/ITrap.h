@@ -13,10 +13,22 @@ class ITrap {
         skill = sk;
      }
 
+     /**
+      * @return returns difficulty to find trap
+     */
      virtual int getStealth() { return stealth; }
 
+     /**
+      * @return returns damage done by trap
+     */
      virtual int getDamage() { return damage; }
 
+     /**
+      * @brief The skill of the trap is how well the trap is made and determines the 
+      *        check needed to avoid it
+      * 
+      * @return returns skill of trap
+     */
      virtual int getSkill() { return skill; }
 
     private:

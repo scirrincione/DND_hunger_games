@@ -14,17 +14,17 @@ int MAX_SKILL = 15;
 class IEntity {
     public:
 
+      IEntity(){
+         lives = 1;
+         location = nullptr;
+      }
+
      /**
-      * @brief constructor for entities giving where they start and their passive perception starting
-      *        with a basic check of 10 for stealth for if those around notice them
+      * @brief constructor for the most basic elements that are consistent across all entities
      */
-     IEntity(IMap* start, int pp, int h, int l, std::string n){
-        passivePerception = pp;
-        location = start;
-        stealth = 10;
+     IEntity(IMap* start, int l){
         lives = l;
-        health = new healthBar(h);
-        name = n;
+        location = start;
      }
 
      virtual ~IEntity(){}
@@ -82,7 +82,7 @@ class IEntity {
             delete this;
             return true;
         }
-        return true;
+        return false;
      }
 
      /**
@@ -102,24 +102,37 @@ class IEntity {
      virtual healthBar* getHealthBar(){
         return health;
      }
+
+     /**
+      * @brief set all of the stats
+     */
+     virtual void setStats(){
+        std::cout << "Please enter passive perception of character" << std::endl;
+        std::cin >> passivePerception;
+
+        std::cout << "Please enter stealth of character" << std::endl;
+        std::cin >> stealth;
+
+        int h;
+        std::cout << "Please enter health of character" << std::endl;
+        std::cin >> h;
+        health = new healthBar(h);
+     }
     
     /**
-     * @brief get name
+     * @brief Pure virtual because name depends on type of player
      * 
      * @return returns name
     */
-     virtual std::string getName(){
-        return name;
-     }
+     virtual std::string getName() = 0;
 
-    private:
+    protected:
      IMap* location;
      int passivePerception;
      int stealth;
      int currentPerception;
      healthBar* health;
      int lives;
-     std::string name;
      
 };
 
