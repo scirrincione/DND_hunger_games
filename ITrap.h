@@ -33,6 +33,13 @@ class ITrap : public IObject {
      */
      virtual int getSkill() { return skill; }
 
+     /**
+      * @brief prints trap for testing purposes
+     */
+     virtual void printTrap() {
+       printf("damage: %i skill: %i stealth: %i\n", damage, skill, stealth);
+     }
+
     private:
      int damage;
      int stealth;

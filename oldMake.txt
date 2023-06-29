@@ -1,0 +1,22 @@
+CXX=g++
+CC=/usr/bin/gcc
+CXX=/usr/bin/g++
+CXXFLAGS = -std=c++17 -g
+
+BUILD_DIR = ./classes
+INCLUDES = -I.. -I./headers/Interfaces
+
+all: $(BUILD_DIR)
+
+# Object File Targets:
+$(BUILD_DIR)/%.o: %.cc
+	mkdir -p $(dir $@)
+	$(call make-depend-cxx,$<,$@,$(subst .o,.d,$@))
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
+
+# Generate dependencies
+make-depend-cxx=$(CXX) -MM -MF $3 -MP -MT $2 $(CXXFLAGS) $(INCLUDES) $1
+-include $(OBJFILES:.o=.d)
+
+clean:
+	rm -rf $(BUILD_DIR)

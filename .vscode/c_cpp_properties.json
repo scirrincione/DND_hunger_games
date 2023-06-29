@@ -4,10 +4,10 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/headers",
-                "${workspaceFolder}/classes",
-                "${workspaceFolder}/classes/Objects",
-                "${workspaceFolder}/headers/Interfaces"
+                "${workspaceFolder}/Objects",
+                "${workspaceFolder}/Interfaces",
+                "${workspaceFolder}/Player",
+                "${workspaceFolder}/Terrain",
             ],
             "defines": [
                 "_DEBUG",

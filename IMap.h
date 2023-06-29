@@ -27,6 +27,13 @@ class IMap : public IObject{
     virtual ~IMap() {}
 
     /**
+     * @brief add a creature to this map
+    */
+   virtual void addCreature(ICreature* creature){
+       creatures.push_back(creature);
+   }
+
+    /**
      * @brief adds a trap to the map
     */
     virtual void addTrap(ITrap* trap) { traps.push_back(trap); }
@@ -38,7 +45,7 @@ class IMap : public IObject{
     */
     virtual std::vector<ICreature*> perceptionCheck(int check) {
         std::vector<ICreature*> seenCreatures = {};
-        for(auto creature : creatures){
+        for(ICreature* creature : creatures){
             if(creature->getStealth()*stealth <= check){
                 seenCreatures.push_back(creature);
             }
@@ -50,7 +57,7 @@ class IMap : public IObject{
      * @brief Setting stealth for creatures in the area
     */
     virtual void stealthSet() {
-        for(auto creature : creatures){
+        for(ICreature* creature : creatures){
             creature->setStealth();
         }
     }
@@ -61,7 +68,7 @@ class IMap : public IObject{
     */
     virtual std::vector<ITrap*> trapCheck(int check) {
         std::vector<ITrap*> seenTraps = {};
-        for(auto trap : traps){
+        for(ITrap* trap : traps){
             if(trap->getStealth()*stealth <= check){
                 seenTraps.push_back(trap);
             }

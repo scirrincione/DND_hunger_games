@@ -1,7 +1,10 @@
 #ifndef HEALTH_BAR
 #define HEALTH_BAR
 
-int MAX_HEALTH = 40; // default health value
+#include <iostream>
+#include <stdlib.h>
+
+//int MAX_HEALTH = 40; // default health value
 
 class healthBar {
     public:
@@ -10,8 +13,8 @@ class healthBar {
       * @brief default constructor if no health value is given, uses MAX_HEALTH
      */
      healthBar(){
-        currentHealth = MAX_HEALTH;
-        maxHealth = MAX_HEALTH;
+        currentHealth = 40;
+        maxHealth = 40;
      }
 
      /**
@@ -53,6 +56,13 @@ class healthBar {
      int getMaxHealth(){
         return maxHealth;
      }
+
+     /**
+      * @brief prints health bar for testing purposes
+     */
+    void printHealthBar(){
+      printf("Current health: %i \n Max health: %i\n", currentHealth, maxHealth);
+    }
 
     private:
      int currentHealth;

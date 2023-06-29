@@ -1,20 +1,13 @@
-#ifndef DIFFERENT_PLAYER_H_
-#define DIFFERENT_PLAYER_H_
+#include "DifferentPlayer.h"
 
-#include "ICreature.h"
-#include "IMap.h"
 
-class DifferentPlayer : public ICreature {
-    public:
-     
-     ~DifferentPlayer(){}
 
-     DifferentPlayer(IMap* start, int pp, int h, int l) : ICreature(start, l) {
+DifferentPlayer::DifferentPlayer(int l) : ICreature(l) {
         setStats();
         setNames();
      }
 
-     void setNames(){
+void DifferentPlayer::setNames(){
         for(int i = 0; i < lives; i++){
             std::string n;
             std::cout << "Please enter the name of character " << i+1 << std::endl;
@@ -23,7 +16,7 @@ class DifferentPlayer : public ICreature {
         }
      }
 
-     bool deathSequence(){
+bool DifferentPlayer::deathSequence(){
         lives -= 1;
         if(lives <= 0){
             delete this;
@@ -32,14 +25,8 @@ class DifferentPlayer : public ICreature {
         names.pop_back();
         setStats();
         return false;
-     }
+   }
 
-     std::string getName(){
+std::string DifferentPlayer::getName(){
         return names.front();
      }
-
-    private:
-     std::vector<std::string> names;
-};
-
-#endif // SAME_PLAYER_H

@@ -3,37 +3,33 @@
 
 #include "healthBar.cc"
 #include "IObject.h"
-#include "IMap.h"
+#include "ITrap.h"
 
 // global variables for maximum values of randomly generated stats
-int MAX_DAMAGE = 20;
-int MAX_STEALTH = 15;
-int MAX_PERCEPTION = 18;
-int MAX_SKILL = 15;
+//int MAX_DAMAGE = 20;
+//int MAX_STEALTH = 15;
+//int MAX_PERCEPTION = 18;
+//int MAX_SKILL = 15;
 
 /**
  * @class ICreature
  * @brief represents various creatures that could be on the terrain
  * 
- * The IMap is the general interface for the different terrains that a player
- * might find themselves in. Has the basic functions that each terrain can do
- * like perceiving creatures in the terrain, checking and springing traps, and 
- * facilitating encounters between creatures
+ * ICreature is the general structure for creatures (players, animals) within the terrain
+ * that can interact with the map
 */
 class ICreature : public IObject{
     public:
 
       ICreature(){
          lives = 1;
-         location = nullptr;
       }
 
      /**
       * @brief constructor for the most basic elements that are consistent across all entities
      */
-     ICreature(IMap* start, int l){
+     ICreature(int l){
         lives = l;
-        location = start;
      }
 
      //virtual ~ICreature() {}
@@ -41,27 +37,27 @@ class ICreature : public IObject{
      /**
       * @brief resolves creature attempting to set a trap using randomly generated values
      */
-     virtual void setTrap(){
-        int damage = rand() % MAX_DAMAGE;
-        int stealth = rand() % MAX_STEALTH;
-        int skill = rand() % MAX_SKILL;
+     virtual ITrap* createTrap(){
+        int damage = rand() % 20; //MAX_DAMAGE
+        int stealth = rand() % 15; //MAX_STEALTH
+        int skill = rand() % 15; //MAX_SKILL
 
         ITrap* new_trap = new ITrap(damage, stealth, skill);
-        location->addTrap(new_trap);
+        return new_trap;
      }
 
      /**
       * @brief resolves perception check with random values
      */
      virtual void perceptionCheck(){
-        currentPerception = rand() % MAX_PERCEPTION;
+        currentPerception = rand() % 18; //MAX_PERCEPTION
      }
 
     /**
      * @brief resolves setting stealth with random values
     */
      virtual void setStealth(){
-        stealth = rand() % MAX_STEALTH;
+        stealth = rand() % 15; //MAX_STEALTH
      }
 
      /**
@@ -136,7 +132,6 @@ class ICreature : public IObject{
      virtual std::string getName() = 0;
 
     protected:
-     IMap* location;
      int passivePerception;
      int stealth;
      int currentPerception;
