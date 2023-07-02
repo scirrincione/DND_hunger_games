@@ -17,6 +17,10 @@ class DifferentPlayer : public ICreature {
 
      std::string getName();
 
+     void perceptionCheck();
+
+     void stealthCheck();
+
     private:
      std::vector<std::string> names;
 };

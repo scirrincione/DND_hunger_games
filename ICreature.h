@@ -23,6 +23,7 @@ class ICreature : public IObject{
 
       ICreature(){
          lives = 1;
+         perceptionCheck();
       }
 
      /**
@@ -56,7 +57,7 @@ class ICreature : public IObject{
     /**
      * @brief resolves setting stealth with random values
     */
-     virtual void setStealth(){
+     virtual void stealthCheck(){
         stealth = rand() % 15; //MAX_STEALTH
      }
 
@@ -81,12 +82,15 @@ class ICreature : public IObject{
      */
      virtual int getPassivePerception(){ return passivePerception; }
 
+     virtual int getLives() { return lives; }
+     
      virtual bool deathSequence(){
         lives -= 1;
         if(lives <= 0){
             delete this;
             return true;
         }
+        health->healFull();
         return false;
      }
 
@@ -106,6 +110,16 @@ class ICreature : public IObject{
      */
      virtual healthBar* getHealthBar(){
         return health;
+     }
+
+     virtual void takeDamage(int d){
+        if(health->takeDamage(d)){
+          deathSequence();
+        }
+     }
+
+     virtual void healDamage(int d){
+        health->healDamage(d);
      }
 
      /**

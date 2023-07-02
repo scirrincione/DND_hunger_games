@@ -57,6 +57,10 @@ class healthBar {
         return maxHealth;
      }
 
+     void healFull(){
+         currentHealth = maxHealth;
+     }
+
      /**
       * @brief prints health bar for testing purposes
      */

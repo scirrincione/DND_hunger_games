@@ -58,7 +58,7 @@ class IMap : public IObject{
     */
     virtual void stealthSet() {
         for(ICreature* creature : creatures){
-            creature->setStealth();
+            creature->stealthCheck();
         }
     }
 

@@ -30,3 +30,13 @@ bool DifferentPlayer::deathSequence(){
 std::string DifferentPlayer::getName(){
         return names.front();
      }
+
+void DifferentPlayer::perceptionCheck(){
+        printf("Enter perception check\n");
+        std::cin >> currentPerception;
+}
+
+void DifferentPlayer::stealthCheck(){
+        printf("Enter stealth check\n");
+        std::cin >> stealth;
+}

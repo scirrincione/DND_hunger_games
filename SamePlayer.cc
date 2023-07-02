@@ -13,3 +13,13 @@ void SamePlayer::setName(){
 std::string SamePlayer::getName(){
         return name;
      }
+
+void SamePlayer::perceptionCheck(){
+        printf("Enter perception check\n");
+        std::cin >> currentPerception;
+}
+
+void SamePlayer::stealthCheck(){
+        printf("Enter stealth check\n");
+        std::cin >> stealth;
+}

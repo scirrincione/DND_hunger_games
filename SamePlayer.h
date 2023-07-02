@@ -12,6 +12,10 @@ class SamePlayer : public ICreature {
 
      std::string getName();
 
+     void perceptionCheck();
+
+     void stealthCheck();
+
     private:
      std::string name;
 };

@@ -25,8 +25,37 @@ int main(int argc, char** argv) {
     testHealth1->healDamage(10);
     printf("After healing 10 damage\n");
 
-    // player tests
+    // same player tests
     SamePlayer* player1 = new SamePlayer(3);
+    printf("Creating trap from player 1\n");
+    ITrap* trap1 = player1->createTrap();
+    trap1->printTrap();
+    printf("Perception check\n");
+    player1->perceptionCheck();
+    printf("%i\n", player1->getCurrentPerception());
+    printf("Stealth check\n");
+    player1->stealthCheck();
+    printf("%i\n", player1->getStealth());
+    printf("Passive perception: %i\n", player1->getPassivePerception());
+    printf("Death sequence\n");
+    player1->takeDamage(40);
+    printf("Lives: %i\n", player1->getLives());
+
+    // different player tests
+    DifferentPlayer* player2 = new DifferentPlayer(3);
+    printf("Creating trap from player 2\n");
+    ITrap* trap2 = player2->createTrap();
+    trap2->printTrap();
+    printf("Perception check\n");
+    player2->perceptionCheck();
+    printf("%i", player2->getCurrentPerception());
+    printf("Stealth check\n");
+    player2->stealthCheck();
+    printf("%i\n", player2->getStealth());
+    printf("Passive perception: %i\n", player2->getPassivePerception());
+    printf("Death sequence\n");
+    player2->takeDamage(40);
+    printf("Lives: %i", player2->getLives());
 
 }
 
