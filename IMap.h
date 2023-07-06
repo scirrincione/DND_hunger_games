@@ -81,9 +81,7 @@ class IMap : public IObject{
     */
     virtual void trapSprung(ICreature* victim, ITrap* trap) {
         if(victim->check() < trap->getSkill()){
-            if(victim->getHealthBar()->takeDamage(trap->getDamage())){ // if damage killed creature
-                creatureDies(victim);
-            }
+            victim->getHealthBar()->takeDamage(trap->getDamage());
         }
     }
 
@@ -96,7 +94,7 @@ class IMap : public IObject{
 
     /**
      * @brief resolves character dying
-    */
+    
     virtual void creatureDies(ICreature* victim){
         for(int i = 0; i < creatures.size(); i++){
             if(creatures.at(i) == victim){
@@ -105,7 +103,7 @@ class IMap : public IObject{
                 }
             }
         }
-    }
+    }*/
 
     protected:
      float stealth; // variable that impacts creatures ability to hide in certain terrain

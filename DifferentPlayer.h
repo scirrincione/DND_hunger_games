@@ -11,6 +11,8 @@ class DifferentPlayer : public ICreature {
 
      DifferentPlayer(int l);
 
+     DifferentPlayer(int l, std::string n, int pp, int s, int h);
+
      void setNames();
 
      bool deathSequence();
@@ -20,6 +22,8 @@ class DifferentPlayer : public ICreature {
      void perceptionCheck();
 
      void stealthCheck();
+
+     int check();
 
     private:
      std::vector<std::string> names;

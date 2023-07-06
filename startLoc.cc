@@ -1,3 +1,5 @@
 #include "startLoc.h"
 
-startLoc::startLoc(){}
+startLoc::startLoc(){IMap();}
+
+startLoc::~startLoc(){}

@@ -7,6 +7,8 @@
 class SamePlayer : public ICreature {
     public:
      SamePlayer(int l);
+     
+     SamePlayer(int l, std::string n, int pp, int s, int h);
 
      void setName();
 
@@ -15,6 +17,8 @@ class SamePlayer : public ICreature {
      void perceptionCheck();
 
      void stealthCheck();
+
+     int check();
 
     private:
      std::string name;

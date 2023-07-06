@@ -7,6 +7,16 @@ DifferentPlayer::DifferentPlayer(int l) : ICreature(l) {
         setNames();
      }
 
+DifferentPlayer::DifferentPlayer(int l, std::string n, int pp, int s, int h){
+        lives = l;
+        for(int i = 0; i < lives; i++){
+                names.push_back(n);
+        }
+        passivePerception = pp;
+        stealth = s;
+        health = new healthBar(h);
+}
+
 void DifferentPlayer::setNames(){
         for(int i = 0; i < lives; i++){
             std::string n;
@@ -39,4 +49,11 @@ void DifferentPlayer::perceptionCheck(){
 void DifferentPlayer::stealthCheck(){
         printf("Enter stealth check\n");
         std::cin >> stealth;
+}
+
+int DifferentPlayer::check(){
+        int c;
+        printf("Enter check: ");
+        std::cin >> c;
+        return c;
 }

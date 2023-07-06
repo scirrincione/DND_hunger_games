@@ -5,6 +5,14 @@ SamePlayer::SamePlayer(int l) : ICreature(l){
         setName();
      }
 
+SamePlayer::SamePlayer(int l, std::string n, int pp, int s, int h){
+        lives = l;
+        name = n;
+        passivePerception = pp;
+        stealth = s;
+        health = new healthBar(h);
+}
+
 void SamePlayer::setName(){
         std::cout << "Please enter the name of the character" << std::endl;
         std::cin >> name;
@@ -22,4 +30,11 @@ void SamePlayer::perceptionCheck(){
 void SamePlayer::stealthCheck(){
         printf("Enter stealth check\n");
         std::cin >> stealth;
+}
+
+int SamePlayer::check(){
+        int c;
+        printf("Enter check: ");
+        std::cin >> c;
+        return c;
 }

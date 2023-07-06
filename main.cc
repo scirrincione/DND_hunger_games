@@ -3,10 +3,11 @@
 #include "healthBar.cc"
 #include "SamePlayer.h"
 #include "DifferentPlayer.h"
+#include "startLoc.h"
 
 int main(int argc, char** argv) {
     // basic trap test
-    ITrap* testTrap = new basicTrap(1, 2, 3);
+    ITrap* testTrap = new basicTrap(20, 2, 3);
     testTrap->printTrap();
 
     // health bar test unique value
@@ -26,7 +27,7 @@ int main(int argc, char** argv) {
     printf("After healing 10 damage\n");
 
     // same player tests
-    SamePlayer* player1 = new SamePlayer(3);
+    ICreature* player1 = new SamePlayer(3, "test1", 3, 4, 30);/*
     printf("Creating trap from player 1\n");
     ITrap* trap1 = player1->createTrap();
     trap1->printTrap();
@@ -39,11 +40,11 @@ int main(int argc, char** argv) {
     printf("Passive perception: %i\n", player1->getPassivePerception());
     printf("Death sequence\n");
     player1->takeDamage(40);
-    printf("Lives: %i\n", player1->getLives());
+    printf("Lives: %i\n", player1->getLives());*/
 
     // different player tests
-    DifferentPlayer* player2 = new DifferentPlayer(3);
-    printf("Creating trap from player 2\n");
+    ICreature* player2 = new DifferentPlayer(3, "test2", 1, 2, 20);
+    /*printf("Creating trap from player 2\n");
     ITrap* trap2 = player2->createTrap();
     trap2->printTrap();
     printf("Perception check\n");
@@ -55,48 +56,29 @@ int main(int argc, char** argv) {
     printf("Passive perception: %i\n", player2->getPassivePerception());
     printf("Death sequence\n");
     player2->takeDamage(40);
-    printf("Lives: %i", player2->getLives());
+    printf("Lives: %i\n", player2->getLives());*/
 
-}
-
-/*#include "ICreature.h"
-#include "IMap.h"
-#include "ITrap.h"
-#include "startLoc.h"
-#include "DifferentPlayer.h"
-#include "SamePlayer.h"
-
-
-int main(int argc, char** argv) {
-    IMap* testMap = new startLoc();
-    ICreature* player = new DifferentPlayer(testMap, 1);
-    ITrap* trap = new ITrap(15, 15, 15);
-
-    testMap->addTrap(trap);
-    testMap->addCreature(player);
-    testMap->stealthSet();
-    std::cout << "Player stealth" << player->getStealth() << std::endl;
-
-    auto percepCheck = testMap->perceptionCheck(10);
-    if(percepCheck.size() > 0){
-        std::cout << percepCheck[0] << std::endl;
+    // starting location tests
+    IMap* starting = new startLoc();
+    starting->addCreature(player1);
+    starting->addCreature(player2);
+    starting->addTrap(testTrap);
+    std::vector<ICreature*> creatures = starting->perceptionCheck(5);
+    for(ICreature* creature:creatures){
+        std::cout << "Creatures seen: " << creature->getName() << "\n";
+    }
+    printf("Check 2");
+    starting->stealthSet();
+    creatures = starting->perceptionCheck(5);
+    for(ICreature* creature:creatures){
+        std::cout << "Creatures seen: " << creature->getName() << "\n";
     }
     
-    player->perceptionCheck();
-    std::cout << "Player perception" << player->getCurrentPerception() << std::endl;
-    auto traps = testMap->trapCheck(player->getCurrentPerception());
-    if(traps.size() > 0){
-        std::cout << traps[0] << std::endl;
-    }
+    std::vector<ITrap*> traps = starting->trapCheck(20);
+    printf("Num traps: %li\n", traps.size());
+    starting->trapSprung(player1, testTrap);
+    printf("Player life after trap:\n" );
+    player1->getHealthBar()->printHealthBar();
+    starting->encounter(player1, player2);
 
-    std::cout << "Trap sprung check" << std::endl;
-    testMap->trapSprung(player, trap);
-    std::cout << player->getHealthBar()->getCurrentHealth() << std::endl;
-
-    ICreature* player2 = new SamePlayer(testMap, 1);
-    testMap->encounter(player, player2);
-
-    std::cout << "Player 2 dies" << std::endl;
-    testMap->creatureDies(player2);
-
-};*/
+};
