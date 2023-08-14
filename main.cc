@@ -4,8 +4,26 @@
 #include "SamePlayer.h"
 #include "DifferentPlayer.h"
 #include "startLoc.h"
+#include "Desert.cc"
+#include "Forest.cc"
+#include "Mountain.cc"
+#include "Plains.cc"
 
 int main(int argc, char** argv) {
+    printf("Enter number of lives");
+    int lives;
+    cin >> lives;
+
+    printf("Same character (1) or different characters (2)");
+    int same_or_dif;
+    cin >> same_or_dif;
+
+    printf("Number of players?");
+    int num_players;
+    cin >> num_players;
+
+    
+    /*
     // basic trap test
     ITrap* testTrap = new basicTrap(20, 2, 3);
     testTrap->printTrap();
@@ -27,7 +45,7 @@ int main(int argc, char** argv) {
     printf("After healing 10 damage\n");
 
     // same player tests
-    ICreature* player1 = new SamePlayer(3, "test1", 3, 4, 30);/*
+    ICreature* player1 = new SamePlayer(3, "test1", 3, 4, 30);
     printf("Creating trap from player 1\n");
     ITrap* trap1 = player1->createTrap();
     trap1->printTrap();
@@ -40,11 +58,11 @@ int main(int argc, char** argv) {
     printf("Passive perception: %i\n", player1->getPassivePerception());
     printf("Death sequence\n");
     player1->takeDamage(40);
-    printf("Lives: %i\n", player1->getLives());*/
+    printf("Lives: %i\n", player1->getLives());
 
     // different player tests
     ICreature* player2 = new DifferentPlayer(3, "test2", 1, 2, 20);
-    /*printf("Creating trap from player 2\n");
+    printf("Creating trap from player 2\n");
     ITrap* trap2 = player2->createTrap();
     trap2->printTrap();
     printf("Perception check\n");
@@ -56,7 +74,7 @@ int main(int argc, char** argv) {
     printf("Passive perception: %i\n", player2->getPassivePerception());
     printf("Death sequence\n");
     player2->takeDamage(40);
-    printf("Lives: %i\n", player2->getLives());*/
+    printf("Lives: %i\n", player2->getLives());
 
     // starting location tests
     IMap* starting = new startLoc();
@@ -79,6 +97,6 @@ int main(int argc, char** argv) {
     starting->trapSprung(player1, testTrap);
     printf("Player life after trap:\n" );
     player1->getHealthBar()->printHealthBar();
-    starting->encounter(player1, player2);
+    starting->encounter(player1, player2);*/
 
 };
